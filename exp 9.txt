@@ -1,0 +1,191 @@
+CREATE TABLE bank(
+	bankcode VARCHAR(3) PRIMARY KEY,
+	bankname VARCHAR(20) NOT NULL,
+	headoffice VARCHAR(15),
+	branches INT);
+
+
+INSERT INTO bank VALUES('FDL','Federal Bank','Ernakulam',650);
+INSERT INTO bank VALUES('SBT','State Bank','Trivandrum',230);
+INSERT INTO bank VALUES('SIB','South Indian Bank','Ernakulam',941);
+INSERT INTO bank VALUES('CSB','Catholic Syrian Bank','Thrissur',941);
+
+SELECT * FROM bank;
+
+CREATE TABLE branch(
+	branchid CHAR(11) PRIMARY KEY,
+	branchname VARCHAR(20) DEFAULT 'New Delhi',
+	bankid VARCHAR(3),
+	FOREIGN KEY (bankid) REFERENCES bank(bankcode) ON DELETE CASCADE);
+
+
+INSERT INTO branch VALUES('SBTR0000134','Monippally','SBT');
+INSERT INTO branch VALUES('FDRL0001025','Kottayam','FDL');
+INSERT INTO branch VALUES('SIBL0000037','Kottayam','SIB');
+INSERT INTO branch VALUES('CSBK0000153','Palai','CSB');
+
+SELECT * FROM branch;
+
+
+DELETE FROM bank WHERE bankcode = 'SBT';
+SELECT * FROM bank;
+SELECT * FROM branch;
+
+ALTER TABLE branch DROP PRIMARY KEY;
+DESC branch;		
+
+
+CREATE VIEW bank_head AS 
+	SELECT * FROM bank WHERE headoffice = 'Ernakulam';
+SELECT * FROM bank_head;
+
+
+CREATE VIEW bank_branch AS 
+	SELECT * FROM branch WHERE branchname = 'Kottayam';
+SELECT * FROM bank_branch;
+
+
+
+declare
+  a number(5);
+  b number(6);
+  c number(5);
+  begin
+  a:=6;
+  b:=9;
+  c:=a+b;
+  dbms_output.put_line('Answer = '|| c);
+ end;
+ /
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DECLARE 
+   num NUMBER; 
+   i NUMBER; 
+   fact NUMBER := 1; 
+BEGIN 
+   num := 5;
+   FOR i IN 1..num LOOP 
+      fact := fact * i; 
+   END LOOP; 
+   DBMS_OUTPUT.PUT_LINE('Factorial of ' || num || ' is ' || fact); 
+END; 
+/
+
+
+
+
+
+
+
+declare
+   a number;
+    b number;
+    sum1 number;
+    mul number;
+    div number;
+    sub number;
+    x number;
+    y number;
+   begin
+   a:=&x;
+   b:=&y;
+   sum1:=a+b;
+   sub:=a-b;
+   mul:=a*b;
+   div:=a/b;
+   dbms_output.put_line('sum is '||sum1);
+   dbms_output.put_line('difference is '||sub);
+   dbms_output.put_line('product is '||mul);
+   dbms_output.put_line('quotient is '||div);
+   end;
+  /
+  
+  
+  
+  
+  
+  
+  DECLARE 
+   num1 NUMBER := 0;
+   num2 NUMBER := 1;
+   cnum NUMBER := 10;
+   i NUMBER;
+   next_num NUMBER;
+BEGIN 
+   DBMS_OUTPUT.PUT_LINE('The first ' || cnum || ' numbers in the Fibonacci series are:');
+   FOR i IN 1..cnum LOOP 
+      DBMS_OUTPUT.PUT_LINE(num1); 
+      next_num := num1 + num2;
+      num1 := num2;
+      num2 := next_num;
+   END LOOP; 
+END; 
+/
+
+
+
+
+
+DECLARE 
+   num1 NUMBER := 10;
+   num2 NUMBER := 0;
+   result NUMBER;
+BEGIN 
+   BEGIN
+      result := num1 / num2;
+   EXCEPTION
+      WHEN ZERO_DIVIDE THEN
+         DBMS_OUTPUT.PUT_LINE('Error: Division by zero is not allowed.');
+   END;
+END; 
+/
+
+
+
+
+
+
+DECLARE 
+    num1 NUMBER := 10; 
+    num2 NUMBER := 20; 
+    num3 NUMBER := 30; 
+    max_num NUMBER; 
+BEGIN 
+    IF num1 > num2 THEN 
+        IF num1 > num3 THEN 
+            max_num := num1; 
+        ELSE 
+            max_num := num3; 
+        END IF; 
+    ELSE 
+        IF num2 > num3 THEN 
+            max_num := num2; 
+        ELSE 
+            max_num := num3; 
+        END IF; 
+    END IF; 
+    DBMS_OUTPUT.PUT_LINE('The greatest number is ' || max_num); 
+END; 
+/
+
+
+
+DECLARE 
+    dummy NUMBER; 
+BEGIN 
+    SELECT 1 INTO dummy 
+    FROM dual 
+    WHERE 1 = 0; 
+EXCEPTION 
+    WHEN NO_DATA_FOUND THEN 
+        DBMS_OUTPUT.PUT_LINE('No data found'); 
+END; 
+/
